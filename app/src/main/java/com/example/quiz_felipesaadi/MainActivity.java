@@ -3,28 +3,48 @@ package com.example.quiz_felipesaadi;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView textFrase;
+    Button botaoNovaFrase;
+    Button btnClique;
+
+    String[] frases = {
+            "Acredite nos seus sonhos.",
+            "Você é capaz de tudo que quiser.",
+            "Persista! O resultado vem com o tempo.",
+            "O esforço de hoje é o sucesso de amanhã.",
+            "Não desista. Grandes coisas levam tempo."
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Conectar o botão do XML pelo id
-        Button btnClique = findViewById(R.id.BotaoEnviar);
-
-        // Evento de clique no botão
+        // Botão do quiz já existente
+        btnClique = findViewById(R.id.BotaoEnviar);
         btnClique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Botão clicado!", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        // Novo TextView e Botão de frases
+        textFrase = findViewById(R.id.textFrase);
+        botaoNovaFrase = findViewById(R.id.botaoNovaFrase);
+
+        botaoNovaFrase.setOnClickListener(v -> {
+            int index = new Random().nextInt(frases.length);
+            textFrase.setText(frases[index]);
         });
     }
 }
